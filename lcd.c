@@ -41,12 +41,11 @@ void lcd_init(void) {
               (1 << LCD_RS) | (1 << LCD_EN) | (1 << LCD_D4) |
               (1 << LCD_D5) | (1 << LCD_D6) | (1 << LCD_D7);
 
-    // Wait for LCD to become ready (docs say 15ms+)
-    _delay_ms(50);
-
+    // Choose output PORT
     LCD_PORT = LCD_PORT & ~(1 << LCD_EN) & ~(1 << LCD_RS);
 
-    _delay_ms(4.1);
+    // Wait for LCD to become ready (docs say 15ms+)
+    _delay_ms(50);
 
     lcd_write_nibble(0x03); // Switch to 4 bit mode
     _delay_ms(4.1);
@@ -57,12 +56,9 @@ void lcd_init(void) {
     lcd_write_nibble(0x03); // 3rd time
     _delay_ms(4.1);
 
-    lcd_write_nibble(0x02); // Set 8-bit mode (?)
+    lcd_write_nibble(0x02); // Set 4-bit mode
+    _delay_ms(4.1);
 
-    lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_ms(4.1);
-    lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_ms(4.1);
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
     _delay_ms(4.1);
 
