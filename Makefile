@@ -61,7 +61,7 @@ clean:
 	@rm -rv $(OBJ_DIR)
 
 fresh: clean
-	@rm -rv $(BIN_DIR) $(OBJ_DIR)
+	@rm -rv $(BIN_DIR)
 
 $(BIN_DIR) $(OBJ_DIR):
 	@mkdir -p $@
