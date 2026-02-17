@@ -20,29 +20,48 @@ PORT    := /dev/ttyUSB0
 
 MCU := atmega328p
 
+SRC_DIR  := src
+BIN_DIR  := bin
+OBJ_DIR  := obj
+
 CFLAGS  := -Wall -Wextra  -Wundef -pedantic \
 		-Os -std=gnu99 -DF_CPU=16000000UL -mmcu=${MCU}
 LDFLAGS := -mmcu=$(MCU)
 
 BIN := program.hex
-SOURCES := main.c lcd.c
-OBJS := $(SOURCES:.c=.o)
+SRC := $(wildcard $(SRC_DIR)/*.c)
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-all: $(BIN)
+# .PHONY är en tag som säger till att dessa taggar inte är associerade med
+# filer, utan ska alltid köras när de anropas.
+# Detta behövs eftersom Makefile targets normalt bara körs om det skett en
+# förändring i minst en av filerna den beror på.
+# Makefiles struktur är ju <target: prerequisites> där vi kan ta som exempel
+# <%.hex: %.elf> som säger att nu ska vi bygga *.hex för alla *.elf-filer vi hittar
+.PHONY: clean fresh all isp
 
-%.o:%.c
-	$(COMPILE.c) -MD -o $@ $<
+all: $(BIN_DIR)/$(BIN)
 
-%.elf: $(OBJS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(COMPILE.c) -MD -o $@ -c $<
+
+%.elf: $(OBJ) | $(BIN_DIR)
 	$(CC) -Wl,-Map=$(@:.elf=.map) $(LDFLAGS) -o $@ $^
 	$(AVRSIZE) $@
+	@mv $(BIN_DIR)/*.map $(OBJ_DIR)
 
 %.hex: %.elf
 	$(OBJCOPY) -O ihex -R .fuse -R .lock -R .user_signatures -R .comment $< $@
 
 # Med detta kan vi flasha vårat program till en inkopplad Arduino genom att skriva <make isp> istället för bara <make>
-isp: ${BIN}
+isp: $(BIN_DIR)/${BIN}
 	@sudo $(OBJISP) -F -V -c arduino -p ${MCU} -P ${PORT} -U flash:w:$<
 
 clean:
-	@rm -f $(BIN) $(OBJS) *.map *.P *.d
+	@rm -rv $(OBJ_DIR)
+
+fresh: clean
+	@rm -rv $(BIN_DIR) $(OBJ_DIR)
+
+$(BIN_DIR) $(OBJ_DIR):
+	@mkdir -p $@
