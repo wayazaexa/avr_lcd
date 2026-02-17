@@ -28,6 +28,14 @@ BIN := program.hex
 SOURCES := main.c lcd.c
 OBJS := $(SOURCES:.c=.o)
 
+# .PHONY är en tag som säger till att dessa taggar inte är associerade med
+# filer, utan ska alltid köras när de anropas.
+# Detta behövs eftersom Makefile targets normalt bara körs om det skett en
+# förändring i minst en av filerna den beror på.
+# Makefiles struktur är ju <target: prerequisites> där vi kan ta som exempel
+# <%.hex: %.elf> som säger att nu ska vi bygga *.hex för alla *.elf-filer vi hittar
+.PHONY: clean fresh all isp
+
 all: $(BIN)
 
 %.o:%.c
