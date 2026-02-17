@@ -53,4 +53,8 @@ isp: ${BIN}
 	@sudo $(OBJISP) -F -V -c arduino -p ${MCU} -P ${PORT} -U flash:w:$<
 
 clean:
-	@rm -f $(BIN) $(OBJS) *.map *.P *.d
+	@rm -f $(OBJS) *.map *.P *.d
+
+fresh: clean
+	@rm -rv $(BIN)
+
