@@ -51,11 +51,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@mv $(BIN_DIR)/*.map $(OBJ_DIR)
 
 %.hex: %.elf
-	$(OBJCOPY) -O ihex -R .fuse -R .lock -R .user_signatures -R .comment $< $@
+	$(OBJCOPY) -O ihex $< $@
 
 # Med detta kan vi flasha vårat program till en inkopplad Arduino genom att skriva <make isp> istället för bara <make>
 isp: $(BIN_DIR)/${BIN}
-	@sudo $(OBJISP) -F -V -c arduino -p ${MCU} -P ${PORT} -U flash:w:$<
+	$(OBJISP) -F -V -c arduino -p ${MCU} -P ${PORT} -U flash:w:$<
 
 clean:
 	@rm -rv $(OBJ_DIR)

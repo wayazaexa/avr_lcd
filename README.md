@@ -1,3 +1,9 @@
+## Wokwi
+
+En wokwi med fullständig koppling för hårdvara finns på https://wokwi.com/projects/455692075285499905
+Om man bara vill simulera går det att göra en enklare koppling: https://wokwi.com/projects/456518477621704705
+
+
 ## Branches
 
 Detta repo innehåller två grenar, main där alla filer ligger direkt i avr_lcd, och alt_structure där källfilerna ligger i en mapp som heter src, och som när man kompileras skapar en obj-mapp där objekt-filerna hamnar, samt en bin-mapp där den körbara hex-filen hamnar.
@@ -11,7 +17,3 @@ Jag har lagt till några kommandon för make. Alternativen är nu:
 * <make isp> - kompilerar programmet och flashar det till en inkopplad Arduino, förutsatt att man har kopplat in en Arduino till sin dator och satt rätt port (se kommentarer i Makefile)
 * <make clean> - rensar mappen genom att ta bort alla objekt-filer
 * <make fresh> - rensar mappen genom att ta bort alla objekt-filer samt hex-filen (brukar egentligen heta cleanall eller liknande, men jag tycker det känns trevligare att få en ren och fräsch mapp ;D )
-
-## lcd.c/.h fungerar just nu bara på wokwi
-
-Då jag vilade upp mig i helgen har jag inte tagit mig tid att gå igenom och fixa till lcd.c/.h än. Det bör bara vara en eller två timings och kanske någon signal som inte stämmer. Under veckan (senast helgen) kommer jag ha fixat dem så att de fungerar på riktig hårdvara.

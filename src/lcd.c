@@ -62,8 +62,12 @@ void lcd_init(void) {
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
     _delay_ms(4.1);
 
+    lcd_clear();
+    _delay_ms(4.1);
+
     lcd_displayparams = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
     lcd_command(LCD_DISPLAYCONTROL | lcd_displayparams);
+    _delay_ms(4.1);
 }
 
 void lcd_on(void) {
