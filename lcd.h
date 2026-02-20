@@ -1,17 +1,17 @@
+#ifndef LCD_DRIVER_
+#define LCD_DRIVER_
+
 #include <avr/io.h>
 
 #define LCD_PORT PORTD
 #define LCD_DDR DDRD
 
-#ifndef LCD_RS
-	#define LCD_RS 0
-	#define LCD_RW 2 // Doesn't seem to work as it should - use GND
-	#define LCD_EN 1
-	#define LCD_D4 4
-	#define LCD_D5 5
-	#define LCD_D6 6
-	#define LCD_D7 7
-#endif
+#define LCD_RS PD2
+#define LCD_EN PD3
+#define LCD_D4 PD4
+#define LCD_D5 PD5
+#define LCD_D6 PD6
+#define LCD_D7 PD7
 
 #define LCD_COL_COUNT 16
 #define LCD_ROW_COUNT 2
@@ -82,3 +82,5 @@ void lcd_set_cursor(uint8_t col, uint8_t row);
 
 void lcd_puts(char *string);
 void lcd_printf(char *format, ...);
+
+#endif

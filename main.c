@@ -10,7 +10,7 @@ int main(void)
     int num = 0;
     while(1) {
         lcd_set_cursor(0,1);
-        lcd_printf("DÖtrist vänta:%d", num++);
+        lcd_printf("Dötrist vänta:%d", num++);
         _delay_ms(1000);
     }
 	return 0;
