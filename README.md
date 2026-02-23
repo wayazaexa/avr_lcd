@@ -1,6 +1,7 @@
 ## Wokwi
 
 En wokwi med fullständig koppling för hårdvara finns på https://wokwi.com/projects/455692075285499905
+
 Om man bara vill simulera går det att göra en enklare koppling: https://wokwi.com/projects/456518477621704705
 
 
@@ -13,7 +14,7 @@ Makefilen i alt_structure är förstås även den helt omstrukturerad för att h
 ## make kommandon
 
 Jag har lagt till några kommandon för make. Alternativen är nu:
-* <make> - kompilerar programmet, användbart om man vill ladda upp hex-filen till wokwi
-* <make isp> - kompilerar programmet och flashar det till en inkopplad Arduino, förutsatt att man har kopplat in en Arduino till sin dator och satt rätt port (se kommentarer i Makefile)
-* <make clean> - rensar mappen genom att ta bort alla objekt-filer
-* <make fresh> - rensar mappen genom att ta bort alla objekt-filer samt hex-filen (brukar egentligen heta cleanall eller liknande, men jag tycker det känns trevligare att få en ren och fräsch mapp ;D )
+* ```make``` - kompilerar programmet, användbart om man vill ladda upp hex-filen till wokwi
+* ```make isp``` - kompilerar programmet och flashar det till en inkopplad Arduino, förutsatt att man har kopplat in en Arduino till sin dator och satt rätt port (se kommentarer i Makefile)
+* ```make clean``` - rensar mappen genom att ta bort alla objekt-filer
+* ```make fresh``` - rensar mappen genom att ta bort alla objekt-filer samt hex-filen (brukar egentligen heta cleanall eller liknande, men jag tycker det känns trevligare att få en ren och fräsch mapp ;D )
